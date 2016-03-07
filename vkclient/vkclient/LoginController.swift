@@ -7,29 +7,69 @@
 //
 
 import UIKit
+import VK_ios_sdk
 
-class LoginController: UIViewController {
+
+class LoginController: UIViewController, VKSdkUIDelegate, VKSdkDelegate {
 
     @IBOutlet weak var loginField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    var PERMISSIONS: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        PERMISSIONS = [VK_PER_FRIENDS, VK_PER_WALL, VK_PER_AUDIO, VK_PER_PHOTOS, VK_PER_NOHTTPS, VK_PER_EMAIL, VK_PER_MESSAGES]
+        
+        let sdkInstance = VKSdk.initializeWithAppId("5339839")
+        sdkInstance.registerDelegate(self as VKSdkDelegate)
+        sdkInstance.uiDelegate = self
+        VKSdk.wakeUpSession(PERMISSIONS) { (authState, error) -> Void in
+            if authState == VKAuthorizationState.Authorized {
+                //TODO: go next screen
+                
+            } else if (error != nil) {
+                let alertController = UIAlertController(title: "Error", message: error.description, preferredStyle: .Alert)
+                
+                alertController.addAction(UIAlertAction(title: "ok", style: .Cancel, handler: nil))
+                
+                self.presentViewController(alertController, animated: true, completion: nil)
+            }
+        }
     }
 
     @IBAction func signIn(sender: UIButton) {
-        if loginField.hasText() && passwordField.hasText() {
-            let login = loginField.text!, password = passwordField.text!
-            
-            let alertController = UIAlertController(title: "Ololo", message: "\(login) \(password)",preferredStyle: .Alert)
-            
-            let button = UIAlertAction(title: "ok", style: .Cancel, handler: nil)
-            
-            alertController.addAction(button)
-       
-            presentViewController(alertController, animated: true, completion: nil)
+        VKSdk.authorize(PERMISSIONS, withOptions: VKAuthorizationOptions(arrayLiteral: VKAuthorizationOptions.UnlimitedToken))
+    }
+    
+    func vkSdkDidDismissViewController(controller: UIViewController!) {
+        
+    }
+    
+    func vkSdkNeedCaptchaEnter(captchaError: VKError!) {
+        
+    }
+    
+    func vkSdkShouldPresentViewController(controller: UIViewController!) {
+        self.presentViewController(controller, animated: true, completion: nil)
+    }
+    
+    func vkSdkWillDismissViewController(controller: UIViewController!) {
+        
+    }
+    
+    func vkSdkAccessTokenUpdated(newToken: VKAccessToken!, oldToken: VKAccessToken!) {
+        
+    }
+    
+    func vkSdkAccessAuthorizationFinishedWithResult(result: VKAuthorizationResult!) {
+        if (result.token != nil) {
+            print("Login as \(result.user?.first_name)")
         }
+    }
+    
+    func vkSdkUserAuthorizationFailed() {
+        
     }
 }
 
