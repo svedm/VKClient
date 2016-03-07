@@ -18,11 +18,6 @@ class LoginController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     @IBAction func signIn(sender: UIButton) {
         if loginField.hasText() && passwordField.hasText() {
             let login = loginField.text!, password = passwordField.text!
