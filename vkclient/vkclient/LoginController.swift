@@ -26,8 +26,7 @@ class LoginController: UIViewController, VKSdkUIDelegate, VKSdkDelegate {
         sdkInstance.uiDelegate = self
         VKSdk.wakeUpSession(PERMISSIONS) { (authState, error) -> Void in
             if authState == VKAuthorizationState.Authorized {
-                //TODO: go next screen
-                
+                self.goToFeed()
             } else if (error != nil) {
                 let alertController = UIAlertController(title: "Error", message: error.description, preferredStyle: .Alert)
                 
@@ -37,9 +36,13 @@ class LoginController: UIViewController, VKSdkUIDelegate, VKSdkDelegate {
             }
         }
     }
+    
+    func goToFeed() {
+        performSegueWithIdentifier("openFeed", sender: self)
+    }
 
     @IBAction func signIn(sender: UIButton) {
-        VKSdk.authorize(PERMISSIONS, withOptions: VKAuthorizationOptions(arrayLiteral: VKAuthorizationOptions.UnlimitedToken))
+        VKSdk.authorize(PERMISSIONS)
     }
     
     func vkSdkDidDismissViewController(controller: UIViewController!) {
@@ -65,6 +68,7 @@ class LoginController: UIViewController, VKSdkUIDelegate, VKSdkDelegate {
     func vkSdkAccessAuthorizationFinishedWithResult(result: VKAuthorizationResult!) {
         if (result.token != nil) {
             print("Login as \(result.user?.first_name)")
+            goToFeed()
         }
     }
     
