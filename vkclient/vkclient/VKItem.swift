@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import VK_ios_sdk
 
 class VKItem: JSONConvertable {
     
@@ -19,7 +20,7 @@ class VKItem: JSONConvertable {
     var friendsOnly : Bool
     //TODO var attachments
     //TODO post_source, likes, reposts
-    
+    var attacments: [VKApiObject] = []
     
     
     required init(withJSON json: NSDictionary) {
@@ -30,5 +31,20 @@ class VKItem: JSONConvertable {
         postType = json.parseField(withName: "post_type", defaultValue: "")
         text = json.parseField(withName: "text", defaultValue: "")
         friendsOnly = Bool.init(json.parseField(withName: "friends_only", defaultValue: 0))
+        let attachmentsArray = json.parseField(withName: "attachments", defaultValue: NSArray())
+        
+        for item in attachmentsArray {
+            if let attachment = item as? NSDictionary {
+                let attachmentType = attachment["type"] as! NSString
+                
+                switch attachmentType {
+                case "photo":
+                    attacments.append(VKPhoto.init(dictionary: attachment["photo"] as! [NSObject : AnyObject]))
+                case "audio":
+                    attacments.append(VKAudio.init(dictionary: attachment["audio"] as! [NSObject : AnyObject]))
+                default: break
+                }
+            }
+        }
     }
 }
