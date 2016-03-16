@@ -12,6 +12,8 @@ import VK_ios_sdk
 class FeedController : UITableViewController {
     
     private var test: [VKItem] = []
+    private var vkFeed: VKFeed?
+    
     let testIdentifier = "BaseFeedTableViewCell"
     
     override func viewDidLoad() {
@@ -23,15 +25,15 @@ class FeedController : UITableViewController {
         res.executeWithResultBlock({ (VKResponse) -> Void in
             if let resp = VKResponse {
                 if let json = resp.json {
-                    let feed = VKFeed(withJSON: json as! NSDictionary)
-                    for item in feed.items {
+                    self.vkFeed = VKFeed(withJSON: json as! NSDictionary)
+                    for item in (self.vkFeed?.items)! {
                         self.test.append(item)
                     }
                     self.tableView.reloadData()
                 }
             }
         }) { (NSError) -> Void in
-                
+            
         }
         
     }
@@ -48,7 +50,36 @@ class FeedController : UITableViewController {
         }
         
         let item = test[indexPath.row]
+        
+        var sourceName: String = ""
+        var sourceImageUrl: String = ""
+        
+        if let source = vkFeed?.profiles.filter({ (user) -> Bool in
+            user.id == abs(item.sourceId)
+        }).first {
+            sourceName = "\(source.first_name) \(source.last_name)"
+            sourceImageUrl = source.photo_100
+        } else if let source = vkFeed?.groups.filter({ (group) -> Bool in
+            group.id == abs(item.sourceId)
+        }).first {
+            sourceName = source.name
+            sourceImageUrl = source.photo_100
+        }
+        
+        cell?.mainImage?.image = nil
+        cell?.avatarImageView?.image = nil
+        
         cell?.nameLabel?.text = item.text
+        cell?.titleLabel?.text = sourceName
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "hh:mm dd.MM.yyyy"
+        cell?.dateLabel?.text = dateFormatter.stringFromDate(item.date)
+        
+        
+        let image = UIImage(data: NSData(contentsOfURL: NSURL(string: sourceImageUrl)!)!)
+        cell?.avatarImageView?.image = image
+
+        
         if item.attacments.count > 0 {
             if let photo = item.attacments.first as? VKPhoto {
                 let image = UIImage(data: NSData(contentsOfURL: NSURL(string: photo.photo_604)!)!)
