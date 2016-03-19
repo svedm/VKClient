@@ -8,6 +8,7 @@
 
 import UIKit
 import VK_ios_sdk
+import AlamofireImage
 
 class FeedController : UITableViewController {
     
@@ -74,16 +75,13 @@ class FeedController : UITableViewController {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "hh:mm dd.MM.yyyy"
         cell?.dateLabel?.text = dateFormatter.stringFromDate(item.date)
-        
-        
-        let image = UIImage(data: NSData(contentsOfURL: NSURL(string: sourceImageUrl)!)!)
-        cell?.avatarImageView?.image = image
 
+
+        cell?.avatarImageView?.af_setImageWithURL(NSURL(string: sourceImageUrl)!)
         
         if item.attacments.count > 0 {
             if let photo = item.attacments.first as? VKPhoto {
-                let image = UIImage(data: NSData(contentsOfURL: NSURL(string: photo.photo_604)!)!)
-                cell?.mainImage?.image = image
+                cell?.mainImage?.af_setImageWithURL(NSURL(string: photo.photo_604)!)
             }
         }
         

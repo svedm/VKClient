@@ -5,5 +5,7 @@ use_frameworks!
 
 target 'vkclient' do
 	pod "VK-ios-sdk"
+	pod "Alamofire"
+	pod "AlamofireImage"
 end
 
