@@ -22,6 +22,7 @@ class BaseFeedTableViewCell: UITableViewCell {
         // Initialization code
         
         nameLabel.text = "gfhgh"
+        mainImage.contentMode = .ScaleAspectFit
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -29,5 +30,4 @@ class BaseFeedTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bgB-EM-waa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bgB-EM-waa">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -79,16 +79,16 @@
         <scene sceneID="pA4-fj-0dr">
             <objects>
                 <tableViewController id="jXN-gX-z1G" customClass="FeedController" customModule="vkclient" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="282" sectionHeaderHeight="28" sectionFooterHeight="28" id="akn-T1-Mq5">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="406" sectionHeaderHeight="28" sectionFooterHeight="28" id="akn-T1-Mq5">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BaseFeedTableViewCell" rowHeight="282" id="b9X-hc-nob" customClass="BaseFeedTableViewCell" customModule="vkclient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="282"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BaseFeedTableViewCell" rowHeight="410" id="b9X-hc-nob" customClass="BaseFeedTableViewCell" customModule="vkclient" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="410"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b9X-hc-nob" id="XAC-ne-1pi">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="281"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="409"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PKh-Hf-Ljo">
@@ -115,7 +115,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fmt-LF-QfI">
-                                            <rect key="frame" x="16" y="95" width="568" height="170"/>
+                                            <rect key="frame" x="16" y="95" width="568" height="298"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MgT-zJ-hMl">
                                             <rect key="frame" x="74" y="31" width="510" height="21"/>
@@ -142,7 +142,6 @@
                                         <constraint firstItem="hW2-zz-TQx" firstAttribute="leading" secondItem="XAC-ne-1pi" secondAttribute="leadingMargin" constant="8" id="kLb-LZ-tJx"/>
                                         <constraint firstItem="W0c-iy-GCC" firstAttribute="leading" secondItem="PKh-Hf-Ljo" secondAttribute="trailing" constant="8" id="l6y-fx-aDD"/>
                                         <constraint firstItem="hW2-zz-TQx" firstAttribute="trailing" secondItem="XAC-ne-1pi" secondAttribute="trailingMargin" id="pFO-ei-SUN"/>
-                                        <constraint firstItem="fmt-LF-QfI" firstAttribute="top" secondItem="hW2-zz-TQx" secondAttribute="bottom" constant="8" id="vtj-NN-5MZ"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="fmt-LF-QfI" secondAttribute="bottom" constant="8" id="yEe-Fr-Zb4"/>
                                     </constraints>
                                 </tableViewCellContentView>

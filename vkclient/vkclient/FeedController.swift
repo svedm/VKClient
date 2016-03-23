@@ -12,7 +12,7 @@ import AlamofireImage
 
 class FeedController : UITableViewController {
     
-    private var test: [VKItem] = []
+    private var test: NSMutableArray = NSMutableArray()
     private var vkFeed: VKFeed?
     
     let testIdentifier = "BaseFeedTableViewCell"
@@ -20,15 +20,13 @@ class FeedController : UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         let res = VKApi.requestWithMethod("newsfeed.get", andParameters: nil)
         res.executeWithResultBlock({ (VKResponse) -> Void in
             if let resp = VKResponse {
                 if let json = resp.json {
                     self.vkFeed = VKFeed(withJSON: json as! NSDictionary)
                     for item in (self.vkFeed?.items)! {
-                        self.test.append(item)
+                        self.test.addObject(item)
                     }
                     self.tableView.reloadData()
                 }
@@ -36,7 +34,8 @@ class FeedController : UITableViewController {
         }) { (NSError) -> Void in
             
         }
-        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 610
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -50,7 +49,7 @@ class FeedController : UITableViewController {
             cell = BaseFeedTableViewCell(style: .Default, reuseIdentifier: testIdentifier)
         }
         
-        let item = test[indexPath.row]
+        let item = test[indexPath.row] as! VKItem
         
         var sourceName: String = ""
         var sourceImageUrl: String = ""
