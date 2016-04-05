@@ -35,50 +35,14 @@ class FeedController : UITableViewController {
         }) { (NSError) -> Void in
             
         }
-//        self.tableView.rowHeight = UITableViewAutomaticDimension
-//        self.tableView.estimatedRowHeight = 610
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        return test.count
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if cellHeightCache.indexForKey(indexPath) != nil {
-           return cellHeightCache[indexPath]!
-        }
-        
-        
-        struct oneCell {
-            static var once_token: dispatch_once_t = 0
-            static var cell = BaseFeedTableViewCell()
-        }
-        
-        dispatch_once(&oneCell.once_token) {
-            oneCell.cell = tableView.dequeueReusableCellWithIdentifier(self.testIdentifier) as! BaseFeedTableViewCell
-        }
-    
-        let item = test[indexPath.row] as! VKItem;
-        oneCell.cell.nameLabel.text = item.text
-        
-        var imageHeight: CGFloat = 0.0
-        
-        if item.attacments.count > 0 {
-            if let photo = item.attacments.first as? VKPhoto {
-                let ratio = photo.width.floatValue / photo.height.floatValue
-                imageHeight = 560 / CGFloat(ratio)
-            }
-        }
-        
-        let cellHeight = 100 + oneCell.cell.nameLabel.frame.height + imageHeight
-        
-        self.cellHeightCache[indexPath] = cellHeight
-        
-        return cellHeight
-    }
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(testIdentifier) as? BaseFeedTableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier(testIdentifier, forIndexPath: indexPath) as? BaseFeedTableViewCell
         
         if cell == nil {
             cell = BaseFeedTableViewCell(style: .Default, reuseIdentifier: testIdentifier)
@@ -108,14 +72,17 @@ class FeedController : UITableViewController {
         }
         
         var firstImageUrl: NSURL? = nil
+        var firstImageHeight: NSNumber? = nil
         
         if item.attacments.count > 0 {
             if let photo = item.attacments.first as? VKPhoto {
                 firstImageUrl = NSURL(string: photo.photo_604!)
+                let ratio = photo.width.floatValue / photo.height.floatValue
+                firstImageHeight = cell!.mainImage.frame.size.width / CGFloat(ratio)
             }
         }
         
-        updateCell(cell!,name: item.text, title: head.sourceName, date: item.date, mainImageUrl: firstImageUrl, avatarImageUrl: NSURL(string: head.sourceImageUrl)!)
+        updateCell(cell!,name: item.text, title: head.sourceName, date: item.date, mainImageUrl: firstImageUrl, mainImageHeight: firstImageHeight, avatarImageUrl: NSURL(string: head.sourceImageUrl)!)
 
         
         return cell!
@@ -123,35 +90,23 @@ class FeedController : UITableViewController {
     
     
     
-    private func updateCell(cell: BaseFeedTableViewCell, name: String, title: String, date: NSDate, mainImageUrl: NSURL?,
-                      avatarImageUrl: NSURL) {
+    private func updateCell(cell: BaseFeedTableViewCell, name: String, title: String, date: NSDate, mainImageUrl: NSURL?, mainImageHeight: NSNumber?,
+                            avatarImageUrl: NSURL) {
         cell.mainImage.image = nil
-        cell.avatarImageView.image = nil
+        cell.cellHeaderView.avatarImageView?.image = nil
         
         cell.nameLabel?.text = name
-        cell.titleLabel?.text = title
+        cell.cellHeaderView.titleLabel?.text = title
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "hh:mm dd.MM.yyyy"
-        cell.dateLabel?.text = dateFormatter.stringFromDate(date)
-        cell.avatarImageView?.af_setImageWithURL(avatarImageUrl)
+        cell.cellHeaderView.dateLabel?.text = dateFormatter.stringFromDate(date)
+        cell.cellHeaderView.avatarImageView?.af_setImageWithURL(avatarImageUrl)
         guard mainImageUrl != nil else {
-            cell.updateConstraintsIfNeeded()
             return
         }
         
         cell.mainImage?.af_setImageWithURL(mainImageUrl!)
-    }
-    
-    private func heightForLabel(text:String, font:UIFont, width:CGFloat) -> CGFloat{
-        let label:UILabel = UILabel(frame: CGRectMake(0, 0, width, CGFloat.max))
-        label.numberOfLines = 0
-        label.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        label.font = font
-        label.text = text
-        
-        label.sizeToFit()
-        return label.frame.height
     }
 }
 

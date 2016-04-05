@@ -91,66 +91,43 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="409"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PKh-Hf-Ljo">
-                                            <rect key="frame" x="16" y="8" width="50" height="50"/>
-                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="65Q-6U-6NQ"/>
-                                                <constraint firstAttribute="width" constant="50" id="ZY9-GK-xKY"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0c-iy-GCC">
-                                            <rect key="frame" x="74" y="8" width="510" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="MCV-ne-4UA"/>
-                                            </constraints>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hW2-zz-TQx">
+                                            <rect key="frame" x="16" y="70" width="568" height="65"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fmt-LF-QfI">
-                                            <rect key="frame" x="16" y="95" width="568" height="298"/>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MgT-zJ-hMl">
-                                            <rect key="frame" x="74" y="31" width="510" height="21"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="See-hn-lUE" customClass="CellHeaderView" customModule="vkclient" customModuleProvider="target">
+                                            <rect key="frame" x="16" y="10" width="568" height="50"/>
+                                            <color key="backgroundColor" red="0.77650523560209428" green="0.77650523560209428" blue="0.77650523560209428" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="858-gd-tTl"/>
+                                                <constraint firstAttribute="height" constant="50" id="WZ3-x5-7zh"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hW2-zz-TQx">
-                                            <rect key="frame" x="16" y="66" width="576" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        </view>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fmt-LF-QfI">
+                                            <rect key="frame" x="16" y="143" width="568" height="250"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="250" id="f20-pX-9c2"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="fmt-LF-QfI" firstAttribute="leading" secondItem="XAC-ne-1pi" secondAttribute="leadingMargin" constant="8" id="10B-Np-ilE"/>
-                                        <constraint firstItem="PKh-Hf-Ljo" firstAttribute="top" secondItem="XAC-ne-1pi" secondAttribute="topMargin" id="7pc-mY-7Ma"/>
-                                        <constraint firstItem="fmt-LF-QfI" firstAttribute="top" secondItem="hW2-zz-TQx" secondAttribute="bottom" constant="8" id="Axk-75-6of"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="W0c-iy-GCC" secondAttribute="trailing" constant="8" id="D9p-4l-TV5"/>
-                                        <constraint firstItem="MgT-zJ-hMl" firstAttribute="leading" secondItem="PKh-Hf-Ljo" secondAttribute="trailing" constant="8" id="IC7-pU-6Uh"/>
-                                        <constraint firstItem="MgT-zJ-hMl" firstAttribute="top" secondItem="XAC-ne-1pi" secondAttribute="topMargin" constant="23" id="JXX-fU-WSO"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="MgT-zJ-hMl" secondAttribute="trailing" constant="8" id="PSg-f9-baG"/>
-                                        <constraint firstItem="PKh-Hf-Ljo" firstAttribute="leading" secondItem="XAC-ne-1pi" secondAttribute="leadingMargin" constant="8" id="PTx-Oz-iso"/>
-                                        <constraint firstItem="W0c-iy-GCC" firstAttribute="top" secondItem="XAC-ne-1pi" secondAttribute="topMargin" id="Vap-p6-6MH"/>
-                                        <constraint firstItem="hW2-zz-TQx" firstAttribute="top" secondItem="PKh-Hf-Ljo" secondAttribute="bottom" constant="8" id="WOR-2I-CyZ"/>
+                                        <constraint firstItem="See-hn-lUE" firstAttribute="leading" secondItem="XAC-ne-1pi" secondAttribute="leadingMargin" constant="8" id="K5r-0L-001"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="fmt-LF-QfI" secondAttribute="trailing" constant="8" id="Y6o-5S-pnc"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="hW2-zz-TQx" secondAttribute="trailing" constant="8" id="cqT-2x-VvA"/>
                                         <constraint firstItem="hW2-zz-TQx" firstAttribute="leading" secondItem="XAC-ne-1pi" secondAttribute="leadingMargin" constant="8" id="kLb-LZ-tJx"/>
-                                        <constraint firstItem="W0c-iy-GCC" firstAttribute="leading" secondItem="PKh-Hf-Ljo" secondAttribute="trailing" constant="8" id="l6y-fx-aDD"/>
-                                        <constraint firstItem="hW2-zz-TQx" firstAttribute="trailing" secondItem="XAC-ne-1pi" secondAttribute="trailingMargin" id="pFO-ei-SUN"/>
+                                        <constraint firstItem="See-hn-lUE" firstAttribute="top" secondItem="XAC-ne-1pi" secondAttribute="topMargin" constant="2" id="lNx-c8-6cG"/>
+                                        <constraint firstItem="hW2-zz-TQx" firstAttribute="top" secondItem="See-hn-lUE" secondAttribute="bottom" constant="10" id="mDP-BQ-qL9"/>
+                                        <constraint firstItem="fmt-LF-QfI" firstAttribute="top" secondItem="hW2-zz-TQx" secondAttribute="bottom" constant="8" id="u62-zQ-bXz"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="See-hn-lUE" secondAttribute="trailing" constant="8" id="xDn-GX-IEG"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="fmt-LF-QfI" secondAttribute="bottom" constant="8" id="yEe-Fr-Zb4"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="avatarImageView" destination="PKh-Hf-Ljo" id="gCy-hR-SzO"/>
-                                    <outlet property="dateLabel" destination="MgT-zJ-hMl" id="HcQ-vb-xkg"/>
+                                    <outlet property="cellHeaderView" destination="See-hn-lUE" id="3YQ-Ms-Th5"/>
                                     <outlet property="mainImage" destination="fmt-LF-QfI" id="8uv-w7-xJ7"/>
                                     <outlet property="nameLabel" destination="hW2-zz-TQx" id="yE6-Qf-B7Q"/>
-                                    <outlet property="titleLabel" destination="W0c-iy-GCC" id="faG-oA-m0w"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CellHeaderView" customModule="vkclient" customModuleProvider="target">
+            <connections>
+                <outlet property="avatarImageView" destination="V9A-Oj-Hvt" id="u51-bt-rrh"/>
+                <outlet property="dateLabel" destination="A6E-XN-Byw" id="OsY-lN-12y"/>
+                <outlet property="titleLabel" destination="3s0-BG-Xa6" id="Peq-gj-3fw"/>
+                <outlet property="view" destination="iN0-l3-epB" id="5o9-Sx-Yyl"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V9A-Oj-Hvt">
+                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="WD7-h3-lFh"/>
+                        <constraint firstAttribute="height" constant="50" id="ZeM-Su-NiM"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3s0-BG-Xa6">
+                    <rect key="frame" x="58" y="0.0" width="542" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A6E-XN-Byw">
+                    <rect key="frame" x="58" y="21" width="542" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="3s0-BG-Xa6" secondAttribute="trailing" id="9oG-wq-Ov9"/>
+                <constraint firstItem="A6E-XN-Byw" firstAttribute="leading" secondItem="V9A-Oj-Hvt" secondAttribute="trailing" constant="8" id="Ajy-qQ-EO3"/>
+                <constraint firstItem="3s0-BG-Xa6" firstAttribute="leading" secondItem="V9A-Oj-Hvt" secondAttribute="trailing" constant="8" id="BJS-WM-q6d"/>
+                <constraint firstItem="V9A-Oj-Hvt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="DhT-Yj-sm5"/>
+                <constraint firstItem="A6E-XN-Byw" firstAttribute="top" secondItem="3s0-BG-Xa6" secondAttribute="bottom" id="DrT-XF-zi3"/>
+                <constraint firstAttribute="trailing" secondItem="A6E-XN-Byw" secondAttribute="trailing" id="I6E-9m-cMD"/>
+                <constraint firstItem="V9A-Oj-Hvt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KH1-i4-Rqq"/>
+                <constraint firstItem="3s0-BG-Xa6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="jsU-7M-uDq"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <point key="canvasLocation" x="346" y="373"/>
+        </view>
+    </objects>
+</document>

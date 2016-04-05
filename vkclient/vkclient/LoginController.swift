@@ -42,7 +42,7 @@ class LoginController: UIViewController, VKSdkUIDelegate, VKSdkDelegate {
     }
 
     @IBAction func signIn(sender: UIButton) {
-        VKSdk.authorize(PERMISSIONS)
+        VKSdk.authorize(PERMISSIONS, withOptions: .DisableSafariController)
     }
     
     func vkSdkDidDismissViewController(controller: UIViewController!) {
