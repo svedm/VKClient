@@ -48,9 +48,18 @@ class VKItem: JSONConvertable {
         }
     }
     
-    public func haveText() -> bool {
+    internal func haveText() -> Bool {
         return text != ""
     }
     
+    internal func getFirstPhotoIfExist() -> VKPhoto? {
+        if (attacments.count > 0) {
+            if let photo = attacments.first as? VKPhoto {
+                return photo
+            }
+        }
+        
+        return nil
+    }
     
 }
