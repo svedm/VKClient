@@ -79,24 +79,18 @@
         <scene sceneID="pA4-fj-0dr">
             <objects>
                 <tableViewController id="jXN-gX-z1G" customClass="FeedController" customModule="vkclient" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="406" sectionHeaderHeight="28" sectionFooterHeight="28" id="akn-T1-Mq5">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="241" sectionHeaderHeight="28" sectionFooterHeight="28" id="akn-T1-Mq5">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BaseFeedTableViewCell" rowHeight="410" id="b9X-hc-nob" customClass="BaseFeedTableViewCell" customModule="vkclient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="410"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BaseFeedTableViewCell" rowHeight="241" id="b9X-hc-nob" customClass="TextTableViewCell" customModule="vkclient" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="241"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b9X-hc-nob" id="XAC-ne-1pi">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="409"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="240"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hW2-zz-TQx">
-                                            <rect key="frame" x="16" y="70" width="568" height="65"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="See-hn-lUE" customClass="CellHeaderView" customModule="vkclient" customModuleProvider="target">
                                             <rect key="frame" x="16" y="10" width="568" height="50"/>
                                             <color key="backgroundColor" red="0.77650523560209428" green="0.77650523560209428" blue="0.77650523560209428" alpha="1" colorSpace="calibratedRGB"/>
@@ -104,30 +98,26 @@
                                                 <constraint firstAttribute="height" constant="50" id="WZ3-x5-7zh"/>
                                             </constraints>
                                         </view>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fmt-LF-QfI">
-                                            <rect key="frame" x="16" y="143" width="568" height="250"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="250" id="f20-pX-9c2"/>
-                                            </constraints>
-                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqC-Ir-aax">
+                                            <rect key="frame" x="16" y="68" width="568" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="fmt-LF-QfI" firstAttribute="leading" secondItem="XAC-ne-1pi" secondAttribute="leadingMargin" constant="8" id="10B-Np-ilE"/>
                                         <constraint firstItem="See-hn-lUE" firstAttribute="leading" secondItem="XAC-ne-1pi" secondAttribute="leadingMargin" constant="8" id="K5r-0L-001"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="fmt-LF-QfI" secondAttribute="trailing" constant="8" id="Y6o-5S-pnc"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="hW2-zz-TQx" secondAttribute="trailing" constant="8" id="cqT-2x-VvA"/>
-                                        <constraint firstItem="hW2-zz-TQx" firstAttribute="leading" secondItem="XAC-ne-1pi" secondAttribute="leadingMargin" constant="8" id="kLb-LZ-tJx"/>
+                                        <constraint firstItem="oqC-Ir-aax" firstAttribute="leading" secondItem="XAC-ne-1pi" secondAttribute="leadingMargin" constant="8" id="Nc1-TR-O2A"/>
+                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="oqC-Ir-aax" secondAttribute="bottom" constant="8" id="bhS-3G-GYU"/>
+                                        <constraint firstItem="oqC-Ir-aax" firstAttribute="top" secondItem="See-hn-lUE" secondAttribute="bottom" constant="8" id="cxW-hM-2ZE"/>
                                         <constraint firstItem="See-hn-lUE" firstAttribute="top" secondItem="XAC-ne-1pi" secondAttribute="topMargin" constant="2" id="lNx-c8-6cG"/>
-                                        <constraint firstItem="hW2-zz-TQx" firstAttribute="top" secondItem="See-hn-lUE" secondAttribute="bottom" constant="10" id="mDP-BQ-qL9"/>
-                                        <constraint firstItem="fmt-LF-QfI" firstAttribute="top" secondItem="hW2-zz-TQx" secondAttribute="bottom" constant="8" id="u62-zQ-bXz"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="See-hn-lUE" secondAttribute="trailing" constant="8" id="xDn-GX-IEG"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="fmt-LF-QfI" secondAttribute="bottom" constant="8" id="yEe-Fr-Zb4"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="oqC-Ir-aax" secondAttribute="trailing" constant="8" id="zbZ-tp-ldp"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="cellHeaderView" destination="See-hn-lUE" id="3YQ-Ms-Th5"/>
-                                    <outlet property="mainImage" destination="fmt-LF-QfI" id="8uv-w7-xJ7"/>
-                                    <outlet property="nameLabel" destination="hW2-zz-TQx" id="yE6-Qf-B7Q"/>
+                                    <outlet property="postText" destination="oqC-Ir-aax" id="EoQ-2u-fMU"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

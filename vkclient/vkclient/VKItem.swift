@@ -47,4 +47,10 @@ class VKItem: JSONConvertable {
             }
         }
     }
+    
+    public func haveText() -> bool {
+        return text != ""
+    }
+    
+    
 }

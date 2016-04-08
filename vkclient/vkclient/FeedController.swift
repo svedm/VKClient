@@ -41,11 +41,30 @@ class FeedController : UITableViewController {
        return test.count
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        struct oneCell {
+            static var once_token: dispatch_once_t = 0
+            static var cell = TextTableViewCell()
+        }
+        
+        dispatch_once(&oneCell.once_token) {
+            oneCell.cell = tableView.dequeueReusableCellWithIdentifier(self.testIdentifier) as! TextTableViewCell
+        }
+        
+        let item = test[indexPath.row] as! VKItem
+        
+        if (item.text != "") {
+            return 200
+        }
+        
+        return 80
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(testIdentifier, forIndexPath: indexPath) as? BaseFeedTableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier(testIdentifier, forIndexPath: indexPath) as? TextTableViewCell
         
         if cell == nil {
-            cell = BaseFeedTableViewCell(style: .Default, reuseIdentifier: testIdentifier)
+            cell = TextTableViewCell(style: .Default, reuseIdentifier: testIdentifier)
         }
         
         let item = test[indexPath.row] as! VKItem
@@ -70,43 +89,11 @@ class FeedController : UITableViewController {
                 return cellHead(sourceName: group.name, sourceImageUrl: group.photo_100)
             }).first)!
         }
-        
-        var firstImageUrl: NSURL? = nil
-        var firstImageHeight: NSNumber? = nil
-        
-        if item.attacments.count > 0 {
-            if let photo = item.attacments.first as? VKPhoto {
-                firstImageUrl = NSURL(string: photo.photo_604!)
-                let ratio = photo.width.floatValue / photo.height.floatValue
-                firstImageHeight = cell!.mainImage.frame.size.width / CGFloat(ratio)
-            }
-        }
-        
-        updateCell(cell!,name: item.text, title: head.sourceName, date: item.date, mainImageUrl: firstImageUrl, mainImageHeight: firstImageHeight, avatarImageUrl: NSURL(string: head.sourceImageUrl)!)
 
         
+        cell?.updateContent(head.sourceName, date: item.date, avatarUrl: NSURL(string: head.sourceImageUrl)!, text: item.text)
+        
         return cell!
-    }
-    
-    
-    
-    private func updateCell(cell: BaseFeedTableViewCell, name: String, title: String, date: NSDate, mainImageUrl: NSURL?, mainImageHeight: NSNumber?,
-                            avatarImageUrl: NSURL) {
-        cell.mainImage.image = nil
-        cell.cellHeaderView.avatarImageView?.image = nil
-        
-        cell.nameLabel?.text = name
-        cell.cellHeaderView.titleLabel?.text = title
-        
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "hh:mm dd.MM.yyyy"
-        cell.cellHeaderView.dateLabel?.text = dateFormatter.stringFromDate(date)
-        cell.cellHeaderView.avatarImageView?.af_setImageWithURL(avatarImageUrl)
-        guard mainImageUrl != nil else {
-            return
-        }
-        
-        cell.mainImage?.af_setImageWithURL(mainImageUrl!)
     }
 }
 
