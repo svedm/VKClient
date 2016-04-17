@@ -85,7 +85,7 @@ class FeedController : UITableViewController {
         let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
         let deltaOffset = maximumOffset - currentOffset
         
-        if deltaOffset <= 0 {
+        if deltaOffset <= maximumOffset * 0.2 {
             loadMore()
         }
     }
