@@ -54,10 +54,15 @@ class FeedController : UITableViewController {
         let item = test[indexPath.row] as! VKItem
         
         if (item.text != "") {
-            return 200
+            
+            let height = CGSizeMake(oneCell.cell.postText.frame.size.width, CGFloat.max)
+            let font = UIFont.systemFontOfSize(17)
+            let size = NSString(string: item.text).boundingRectWithSize(height, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+            
+            return 80.0 + size.size.height
         }
         
-        return 80
+        return 90
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
