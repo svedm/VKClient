@@ -13,6 +13,7 @@ class VKFeed: JSONConvertable {
     var items: [VKItem]
     var profiles: [VKUser] = []
     var groups: [VKGroup] = []
+    var nextFrom: String?
     
     required init(withJSON json: NSDictionary) {
         let vkItems = json["items"] as! NSArray
@@ -40,6 +41,22 @@ class VKFeed: JSONConvertable {
                     groups.append(group)
                 }
             }
+        }
+        
+        nextFrom = json.parseField(withName: "next_from", defaultValue: "")
+    }
+    
+    var vkFeedSources: [VKFeedSource]! {
+        get {
+            var sources = profiles.map { (user) -> VKFeedSource in
+                return VKFeedSource(id: user.id, name: "\(user.first_name) \(user.last_name)", photo: user.photo_100)
+            }
+            
+            sources.appendContentsOf(groups.map { (group) -> VKFeedSource in
+                return VKFeedSource(id: Int(group.id) * -1, name: group.name, photo: group.photo_100)
+            })
+            
+            return sources
         }
     }
 }

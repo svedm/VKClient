@@ -13,27 +13,18 @@ import AlamofireImage
 class FeedController : UITableViewController {
     
     private var test: NSMutableArray = NSMutableArray()
-    private var vkFeed: VKFeed?
+    private var nextFeedItem: String?
+    private var vkFeedSources = [VKFeedSource]()
     private var cellHeightCache: [NSIndexPath : CGFloat] = [:]
+    private var loadMoreStatus = false
     
     let testIdentifier = "BaseFeedTableViewCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let res = VKApi.requestWithMethod("newsfeed.get", andParameters: nil)
-        res.executeWithResultBlock({ (VKResponse) -> Void in
-            if let resp = VKResponse {
-                if let json = resp.json {
-                    self.vkFeed = VKFeed(withJSON: json as! NSDictionary)
-                    for item in (self.vkFeed?.items)! {
-                        self.test.addObject(item)
-                    }
-                    self.tableView.reloadData()
-                }
-            }
-        }) { (NSError) -> Void in
-            
+        loadFeed(nil) {
+            self.tableView.reloadData()
         }
     }
     
@@ -74,31 +65,66 @@ class FeedController : UITableViewController {
         
         let item = test[indexPath.row] as! VKItem
         
-        struct cellHead {
-            var sourceName: String = ""
-            var sourceImageUrl: String = ""
-        }
+        let source = self.vkFeedSources.filter { (source) -> Bool in
+            source.id == item.sourceId
+        }.first
         
-        var head: cellHead
-        
-        if item.sourceId > 0 {
-            head = (vkFeed?.profiles.filter({ (user) -> Bool in
-                user.id == item.sourceId
-            }).map({ (user) -> cellHead in
-                return cellHead(sourceName: "\(user.first_name) \(user.last_name)", sourceImageUrl: user.photo_100)
-            }).first)!
-        } else {
-            head = (vkFeed?.groups.filter({ (group) -> Bool in
-                group.id == abs(item.sourceId)
-            }).map({ (group) -> cellHead in
-                return cellHead(sourceName: group.name, sourceImageUrl: group.photo_100)
-            }).first)!
-        }
-
-        
-        cell?.updateContent(head.sourceName, date: item.date, avatarUrl: NSURL(string: head.sourceImageUrl)!, text: item.text)
+        cell?.updateContent(source!.name, date: item.date, avatarUrl: NSURL(string: source!.photo)!, text: item.text)
         
         return cell!
     }
+    
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        //super.scrollViewDidScroll(scrollView)
+        
+        if self.nextFeedItem == nil {
+            return;
+        }
+    
+        let currentOffset = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+        let deltaOffset = maximumOffset - currentOffset
+        
+        if deltaOffset <= 0 {
+            loadMore()
+        }
+    }
+    
+    func loadMore() {
+        if (!loadMoreStatus && self.nextFeedItem != nil) {
+            self.loadMoreStatus = true
+            loadFeed(["start_from": self.nextFeedItem!]){
+                self.loadMoreStatus = false
+                self.tableView.reloadData()
+            }
+        }
+    }
+
+    
+    func loadFeed(params: [NSObject: AnyObject]?, withCallback callback: () -> Void){
+        dispatch_async(dispatch_get_main_queue()) {
+            
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            let res = VKApi.requestWithMethod("newsfeed.get", andParameters: params)
+            res.executeWithResultBlock({ (VKResponse) -> Void in
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                if let resp = VKResponse {
+                    if let json = resp.json {
+                        let vkFeed = VKFeed(withJSON: json as! NSDictionary)
+                        self.vkFeedSources.appendContentsOf(vkFeed.vkFeedSources)
+                        self.nextFeedItem = vkFeed.nextFrom
+                        for item in vkFeed.items {
+                            self.test.addObject(item)
+                        }
+                        callback()
+                    }
+                }
+            }) { (NSError) -> Void in
+                
+            }
+        }
+        
+    }
+    
 }
 
